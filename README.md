@@ -1,6 +1,5 @@
 # R
-Analise de Dados com R
-# Tudo na Linguagem R é Função
+Analise de Dados com R, tudo na Linguagem R é Função
 
 Download da Ferramenta R
 Rtools - rtools40-x86_64.exe - https://cran.r-project.org/bin/windows/Rtools/rtools40.html
