@@ -63,3 +63,22 @@ var(vendas$Valor)
 sd(vendas$Valor)
 
 # Medidas de Posição Relativa
+
+head(vendas) -- Cabeça/Primeiras linhas
+tail(vendas) -- Traseira/Ultimas linhas
+View(vendas) -- Visualização da Tabela
+
+# Medidas de Tendência Central
+sumary(vendas$Valor)
+sumary(vendas[c'Valor', 'Custo') ]) -- Filtrando apenas duas colunas
+
+#Explorando variávies númericas
+mean(vendas$Valor) -- media
+median(vendas$Valor) -- mediana
+quantile(vendas$Valor) -- quartiz
+quantile(vendas$Valor, probs = c(0.01, 0.99) ) -- Percentil de 2 posições
+quantile(vendas$Valor, seq(from = 0, to = 1, by = 0.20) ) -- Percentil de Range - 0 à 1, saltando de 0.20 por vez
+IQR(vendas$Valor) -- Diferença entre Q3 e Q1
+range(vendas$Valor) -- Traz valor min e max da coluna
+sumary(vendas$Valor)
+diff(range(vendas$Valor) ) -- Diferença entre o valor min e max
