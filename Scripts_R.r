@@ -122,3 +122,29 @@ calculaModa <- function(v) {
 calculaModa(notas$TurmaA)
 calculaModa(notas$TurmaB)
 
+# Tabela de Frequencia
+# Carregando os Dados
+dados <- read.table("Usuarios.csv",
+		dec = ".",
+		sep = ",",
+		h   = T,
+		fileEncoding = "windows-1252"
+)
+
+# Visualizando e Sumarizando os Dados
+View(dados)
+names(dados)
+str(dados)
+summary(dados$salario)
+summary(dados$grau_instrucao)
+mean(dados$salario)
+mean(dados$grau_instrucao)
+
+# Tabela de Frequencias Absolutas
+freq <- table(dados$grau_instrucao)
+View(freq)
+
+# Tabela de Frequencias Relativas
+freq_rel <- prop.table(freq)
+View(freq_rel)
+
