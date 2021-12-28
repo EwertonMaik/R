@@ -82,3 +82,43 @@ IQR(vendas$Valor) -- Diferença entre Q3 e Q1
 range(vendas$Valor) -- Traz valor min e max da coluna
 sumary(vendas$Valor)
 diff(range(vendas$Valor) ) -- Diferença entre o valor min e max
+
+# Carregando o DataSet
+notas <- read.csv("Notas.csv", fileEncoding = "windows-1252")
+
+# Apresentar um resumo de tipos de dados e estatisticas do dataset
+View(notas)
+str(notas)
+summary(notas$TurmaA)
+summary(notas$TurmaB)
+
+# Média de cada turma
+mean(notas$TurmaA)
+mean(notas$TurmaB)
+
+# Turma que apresentou maior variabilidade de notas
+sd(notas$TurmaA)
+sd(notas$TurmaB)
+
+# Coeficiente de variação das 2 turmas
+media_ta <- mean(notas$TurmaA)
+media_tb <- mean(notas$TurmaB)
+
+sd_ta <- sd(notas$TurmaA)
+sd_tb <- sd(notas$TurmaB)
+
+CVA <- sd_ta / media_ta * 100
+CVB <- ds_tb / media_tb * 100
+
+print(CVA)
+print(CVB)
+
+# Nota que apareceu mais vezes em cada turma
+calculaModa <- function(v) {
+	uniqv <- unique(v)
+	uniqv[which.max(tabullate(match(v, uniqv)))]
+}
+
+calculaModa(notas$TurmaA)
+calculaModa(notas$TurmaB)
+
