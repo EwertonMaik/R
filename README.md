@@ -10,3 +10,5 @@ R-4.0.3-win.exe - https://www.npackd.org/p/r/4.0.3
 
 IDE - Studio de Desenvolvimento com a Linguagem R
 RStudio - rstudio.com
+
+Site Catálogo Gráficos Linguagem R - http://www.r-graph-gallery.com/
