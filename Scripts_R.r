@@ -172,3 +172,63 @@ tabela_final <- cbind(
 )
 
 View(tabela_final)
+
+# Criação de Demais Gráficos com R
+# Configurar Work Directory
+setwd("C/Users/dmpm/Documents/PowerBI/Cap12")
+
+# Obter caminho do Work Directory
+getwd()
+
+# Dados - Criando na mesma variável 2 verotes
+vetor_total_resultados = c(3, 12, 5, 18, 45)
+names(vetor_total_resultados) = c("A", "B", "C", "D", "E")
+vetor_total_resultados
+
+# Funcao BARPLOT -- Grafico de Barras
+barplot(vetor_total_resultados)
+barplot(vetor_total_resultados, col = c(1, 2, 3, 4, 5) ) # Personalizo o Grafico, cada barra com uma com, conforme vetor passado para o parâmetro COL
+
+# Salvar a imagem do Grafico anterior no disco
+png("barplot.png", width = 480, height = 480) # Criando arquivo vazio
+barplot(vetor_total_resultados,
+			col  = rgb(0.5, 0.1, 0.6, 0.6),
+			xlab = "Categorias",
+			ylab = "Valores",
+			main = "Barplot em R",
+			ylim = c(0,60)
+		)
+dev.off() # Salvando em Disco
+
+# Ggplot2
+library(ggplot2) # Carregando Biblioteca
+Views(mtcars) # Visualizando DataSet
+
+# Barplot -- Criando Grafico de Barras -- Gramatica dos Graficos
+ggplot(mtcars, aes(x = as.factor(cyl) ) ) + geom_bar()
+
+# Mesmo Grafico Customizando as cores
+ggplot(mtcars, aes(x = as.factor(cyl), fill = as.factor(cyl) ) )
++ geom_bar()
++ scale_fill_manual(values = c("red", "green", "blue") )
+
+# Criando outro exemplo dados Dummy (Ficticios)
+dados = data.frame(group = c("A", "B", "C", "D"), value = c(33, 62, 56, 67) )
+View(dados)
+
+# Barplot
+ggplot(dados, aes(x = group, y = value, fill = group) )
++ geom_bar(width = 0.85, stat = "identity")
+
+# Pie Chart - Grafico de Pizza
+fatias <- c(4, 12, 14, 16, 8)
+paises <- c("Brasil", "Estados Unidos", "Alemanha", "Reino Unido", "Espanha")
+pie(fatias, labels = paises, main = "Leitura de Livros Por Pessoa/Ano")
+
+# pie Chart 3D - Grafico de Pizza 3D
+install.packages("plotrix")
+library(plotrix)
+
+fatias <- c(4, 12, 14, 16, 8)
+paises <- c("Brasil", "Estados Unidos", "Alemanha", "Reino Unido", "Espanha")
+pie3D(fatias, labels = paises, explode = 0.1, main = "Leitura de Livros Por Pessoa/Ano")
