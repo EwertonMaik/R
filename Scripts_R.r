@@ -345,3 +345,14 @@ ggplot(dados, aes(x = value))
 # Cor Proporcional
 ggplot(dados, aes(x = value) )
 + geom_histogram(binwidth = 0.2, aes(fill = ..count..) )
+
+# Script para usar dentro do Power BI
+setwd("C:/Users/dmpm/Documents/PowerBI/Cap12")
+getwd()
+
+vendas <- read.csv("Vendas.csv", fileEncoding = "windows-1252")
+
+library(ggplot2)
+
+?qplot
+qplot(Valor, Custo, data = vendas)
