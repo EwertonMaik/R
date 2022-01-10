@@ -28,3 +28,15 @@ medias_iris <- summarize(group_by(dados_iris, Species),
 )
 
 View(media_iris)
+
+# Atividade 2 - Extrair o valor inteiro de uma das colunas decimais
+library(data.table)
+dados_iris_id <- data.table(dados_iris)
+View(dados_iris_id)
+dados_iris_id$Sepal.Length <- as.integer(dados_iris_id$Sepal.Length)
+View(dados_iris_id)
+
+# Para executar no Power Query
+library(data.table)
+dados_iris_id <- data.table(dados_iris)
+dados_iris_id$Sepal.Length <- as.integer(dados_iris_id$Sepal.Length) # $ valor salvo na propria coluna
