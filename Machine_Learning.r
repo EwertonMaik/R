@@ -69,10 +69,94 @@ View(dados_clientes)
 View(dados_clientes$Genero)
 str(dados_clientes$Genero)
 summary(dados_clientes$Genero)
-?cut
+?cut # Converte uma variavel numerica em categorica
 dados_clientes$Genero <- cut(dados_clientes$Genero,
 							 c(0,1,2),
 							 labels = c("Masculino", "Feminino")
 )
 View(dados_clientes$Genero)
 str(dados_clientes$Genero)
+summary(dados_clientes$Genero)
+
+# Escolaridade
+str(dados_clientes$Escolaridade)
+summary(dados_clientes$Escolaridade)
+dados_clientes$Escolaridade <- cut(dados_clientes$Escolaridade,
+								   c(0,1,2,3,4),
+								   labels = c("Pos Graduado",
+											  "Graduado",
+											  "Ensino Medio",
+											  "Outros")
+)
+
+View(dados_clientes$Escolaridade)
+str(dados_clientes$Escolaridade)
+summary(dados_clientes$Escolaridade)
+
+# Estado Civil
+str(dados_clientes$Estado_Civil)
+summary(dados_clientes$Estado_Civil)
+dados_clientes$Estado_Civil <- cut(dados_clientes$Estado_Civil,
+								   c(-1,0,1,2,3),
+								   labels = c("Desconhecido",
+											  "Casado",
+											  "Solteiro",
+											  "Outro")
+)
+
+View(dados_clientes$Estado_Civil)
+str(dados_clientes$Estado_Civil)
+summary(dados_clientes$Estado_Civil)
+
+# Convertendo a variavel para o tipo fator com faixa etária
+str(dados_clientes$Idade)
+summary(dados_clientes$Idade)
+hist(dados_clientes$Idade)
+dados_clientes$Idade <- cut(dados_clientes$Idade,
+							c(0, 30, 50, 100),
+							labels = c("Jovem", "Adulto", "Idoso")
+)
+
+View(dados_clientes$Idade)
+str(dados_clientes$Idade)
+summary(dados_clientes$Idade)
+
+# Convertendo a variavel que indica pagamentos para o tipo fator
+# Altera apenas o Tipo da Variavel, mantendo o valor
+dados_clientes$PAY_0 <- as.factor(dados_clientes$PAY_0)
+dados_clientes$PAY_2 <- as.factor(dados_clientes$PAY_2)
+dados_clientes$PAY_3 <- as.factor(dados_clientes$PAY_3)
+dados_clientes$PAY_4 <- as.factor(dados_clientes$PAY_4)
+dados_clientes$PAY_5 <- as.factor(dados_clientes$PAY_5)
+dados_clientes$PAY_6 <- as.factor(dados_clientes$PAY_6)
+
+# Dataset após as conversões
+str(dados_clientes)
+sapply(dados_clientes, function(x) sum(is.na(x) ) )
+missmap(dados_clientes, main = "Valores Missing Observados")
+dados_cliente <- na.omit(dados_clientes)
+missmap(dados_clientes, main = "Valores Missing Observados")
+dim(dados_clientes)
+View(dados_clientes)
+
+# Alterando a variavel dependente para o tipo fator
+str(dados_clientes$inadimplente)
+colnames(dados_clientes)
+dados_clientes$inadimplente <- as.factor(dados_clientes$inadimplente)
+str(dados_clientes$inadimplente)
+View(dados_clientes)
+
+# Total de inadimplente versus não-inadimplente
+table(dados_clientes$inadimplente)
+
+# Vejamos as porcentagens entre as classes
+prop.table(table(dados_clientes$inadimplente))
+
+# Plot da distribuição usando ggplot2
+ggplot(inadimplente, data = dados_clientes, geom = "bar") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+# Set seed
+set.seed(1234)
+
+# Amostragem estratificada
