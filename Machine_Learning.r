@@ -160,3 +160,39 @@ theme(axis.text.x = element_text(angle = 90, hjust = 1))
 set.seed(1234)
 
 # Amostragem estratificada
+?createDataPartition
+indice <- createDataPartition(dados_clientes$inadimplente, p = 0.75, list = FALSE)
+dim(indice)
+
+# Definimos os dados de treinamento como subconjunto de dados original
+# com numeros de indice de linha conforme identificado acima e todas as colunas
+dados_treino <- dados_clientes[indice,]
+dim(dados_treino)
+table[dados_treino$inadimplente]
+
+# Veja porcentagens entre as classes
+prop.table(table(dados_treino$inadimplente))
+
+# Numero de registros no dataset de treinamento
+dim(dados_treino)
+
+# Comparamos as porcentagens entre as classes de treinamento e dados originais
+compara_dados <- cbind(prop.table(table(dados_treino$inadimplente) )
+						prop.table(table(dados_clientes$inadimplente) ) )
+colnames(compara_dados) <- c("Treinamento", "Original")
+compara_dados
+
+# Melt Data - Converte colunas em linhas
+?reshape2::melt
+melt_compara_dados <- melt(compara_dados)
+melt_compara_dados
+
+# Plot para ver a distribuicao do treinamento vs original
+ggplot(melt_compara_dados, aes(x = X1, y = value))
++ geom_bar( aes(fill = X2), stat = "identity", position = "dodge" )
++ theme(axis.text.x = element_text(angle = 90, hjust = 1) )
+
+# Tudo o que nao esta no dataset de treinamento esta no dataset de teste. Observer o sinal
+dados_teste <- dados_clientes[-indice,]
+dim(dados_teste)
+dim(dados_treino)
