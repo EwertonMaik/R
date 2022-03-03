@@ -45,6 +45,10 @@ dados_treino_bal <- SMOTE(inadimplente ~ ., data = dados_treino)
 table(dados_treino_bal$inadimplente)
 prop.table(table(dados_treino_bal$inadimplente) )
 
+
+
+
+# Modelo 02 de Machine Learning
 # Costruindo a segunda versão do modelo
 modelo_v2 <- randomForest(inadimplente ~ ., data = dados_treino_bal)
 modelo_v2
@@ -82,3 +86,22 @@ varImPlot(modelo_v2)
 imp_var <- importance(modelo_v2)
 varImportance <- data.frame(Variables = row.name(imp_var),
 							Importance = round(imp_var[ , 'MeanDecreaseGini'], 2 ))
+
+# Criando o rank de variaveis baseado na importancia
+rankImportance <- varImportance %>%
+mutate(Rank = paste0('#', dense_rank(desc(Importance) ) ) )
+
+# Usando ggplot2 para visualizar a importancia relativa das variaveis
+ggplot(rankImportance,
+	   aes( x = reorder(variables, Importance),
+		    y = Importance, fill = Importance
+		   )
+	   ) +
+geom_bar(stat = 'identity') +
+geom_text(aes(x = Variables, y = 0.5, label = Rank),
+		  hjust  = 0,
+		  vjust  = 0.55,
+		  size   = 4,
+		  colour = 'red') +
+labs(x = 'Variables') +
+coord_flip()
